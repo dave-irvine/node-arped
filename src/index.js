@@ -4,10 +4,10 @@ import ARPParser from './parsers/Parser';
 
 export default class Arped {
     constructor() {
-        this.arpFetcher = new GenericARP();
-
         if (/linux/.test(process.platform)) {
             this.arpFetcher = new LinuxARP();
+        } else {
+            this.arpFetcher = new GenericARP();
         }
 
         this.arpParser = new ARPParser();
