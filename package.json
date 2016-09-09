@@ -1,10 +1,15 @@
 {
-  "name": "node-arped",
+  "name": "arped",
   "version": "0.0.1",
   "description": "Cross platform ARP table tools",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "npm test && npm run build && git diff --exit-code --quiet",
+    "preversion": "npm test && npm run build && git diff --exit-code --quiet",
+    "postversion": "git push && git push --tags",
+    "pretest": "eslint src/",
+    "test": "mocha --compilers js:babel-core/register",
+    "build": "babel src --out-dir lib"
   },
   "keywords": [
     "arp"
@@ -18,6 +23,7 @@
     "babel-preset-es2015": "^6.14.0",
     "chai": "^3.5.0",
     "mocha": "^3.0.2",
+    "proxyquire": "^1.7.10",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0"
   },
