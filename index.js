@@ -1,5 +1,5 @@
 module.exports = (function () {
-    var Arper = require('./lib/index').default;
+    var Arped = require('./lib/index').default;
 
-    return new Arper();
+    return new Arped();
 })();

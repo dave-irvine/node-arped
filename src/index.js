@@ -2,7 +2,7 @@ import GenericARP from './fetchers/GenericARP';
 import LinuxARP from './fetchers/LinuxARP';
 import ARPParser from './parsers/Parser';
 
-export default class Arper {
+export default class Arped {
     constructor() {
         this.arpFetcher = new GenericARP();
 

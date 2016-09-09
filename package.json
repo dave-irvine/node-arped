@@ -1,5 +1,5 @@
 {
-  "name": "node-arper",
+  "name": "node-arped",
   "version": "0.0.1",
   "description": "Cross platform ARP table tools",
   "main": "index.js",
@@ -23,5 +23,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.11.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dave-irvine/node-arped.git"
   }
 }

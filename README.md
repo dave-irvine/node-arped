@@ -1,4 +1,4 @@
-node-arper
+node-arped
 ----------
 
 A cross platform ARP utility toolkit.
@@ -6,15 +6,15 @@ A cross platform ARP utility toolkit.
 #### Install:
 
 ```
-npm install arper
+npm install arped
 ```
 
 #### Usage:
 
 ```
-var arper = require('arper');
+var arped = require('arped');
 
-console.log(arper.table());
+console.log(arped.table());
 ```
 
 #### API:
