@@ -46,10 +46,12 @@ export default class ARPParser {
             });
 
             if (ip && mac && device) {
-                result.Devices[device] = {
-                    IPs: {},
-                    MACs: {}
-                };
+                if (!result.Devices[device]) {
+                    result.Devices[device] = {
+                        IPs: {},
+                        MACs: {}
+                    };
+                }
 
                 result.Devices[device].IPs[ip] = mac;
                 result.Devices[device].MACs[mac] = ip;

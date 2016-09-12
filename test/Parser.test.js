@@ -106,5 +106,59 @@ describe('Parser', () => {
                 }
             });
         });
+
+        it('should parse multiple entries on a single interface', () => {
+            let result = parser.parse(fixtures['LinuxARP-MultipleOnSingle.txt']);
+
+            return expect(result).to.deep.equal({
+                Devices: {
+                    eth0: {
+                        IPs: {
+                            '192.168.0.1': '00:aa:22:bb:33:cc',
+                            '192.168.0.2': '11:bb:33:cc:44:dd',
+                            '192.168.0.3': '22:cc:44:dd:55:ee'
+                        },
+                        MACs: {
+                            '00:aa:22:bb:33:cc': '192.168.0.1',
+                            '11:bb:33:cc:44:dd': '192.168.0.2',
+                            '22:cc:44:dd:55:ee': '192.168.0.3'
+                        }
+                    }
+                }
+            });
+        });
+
+        it('should parse multiple entries on a multiple interfaces', () => {
+            let result = parser.parse(fixtures['LinuxARP-MultipleOnDual.txt']);
+            
+            return expect(result).to.deep.equal({
+                Devices: {
+                    eth0: {
+                        IPs: {
+                            '192.168.0.1': '00:aa:22:bb:33:cc',
+                            '192.168.0.2': '11:bb:33:cc:44:dd',
+                            '192.168.0.3': '22:cc:44:dd:55:ee'
+                        },
+                        MACs: {
+                            '00:aa:22:bb:33:cc': '192.168.0.1',
+                            '11:bb:33:cc:44:dd': '192.168.0.2',
+                            '22:cc:44:dd:55:ee': '192.168.0.3'
+                        }
+                    },
+                    eth1: {
+                        IPs: {
+                            '192.168.0.4': '33:dd:55:ee:66:ff',
+                            '192.168.0.5': '44:ee:66:ff:77:aa',
+                            '192.168.0.6': '55:ff:77:aa:88:bb'
+                        },
+                        MACs: {
+                            '33:dd:55:ee:66:ff': '192.168.0.4',
+                            '44:ee:66:ff:77:aa': '192.168.0.5',
+                            '55:ff:77:aa:88:bb': '192.168.0.6'
+                        }
+                    }
+                }
+            });
+        });
     });
 });
