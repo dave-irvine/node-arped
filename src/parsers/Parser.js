@@ -7,10 +7,18 @@ export default class ARPParser {
     constructor() {}
 
     parse(table) {
+        if (!table || typeof table !== "string") {
+            throw new Error(`Missing table to parse`);
+        }
+
         let rows = table.split('\n'),
             result = {
                 Devices: {}
             };
+
+        if (rows.length < 2) {
+            throw new Error(`Table has only one row`);
+        }
 
         rows.forEach((row) => {
             let cols = row.split(' '),
