@@ -1,6 +1,6 @@
 const IPv4Regex = /([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})/;
 const MACRegex = /([0-9a-f]{1,2}[:\-][0-9a-f]{1,2}[:\-][0-9a-f]{1,2}[:\-][0-9a-f]{1,2}[:\-][0-9a-f]{1,2}[:\-][0-9a-f]{1,2})/;
-const DeviceRegex = /((?:en|wl)[\w]+)/;
+const DeviceRegex = /((?:en|wl|eth)[\w]+)/;
 const InterfaceRegex = /Interface:[\s]([\w.]+)/;
 
 export default class ARPParser {
