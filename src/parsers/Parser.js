@@ -6,7 +6,7 @@ const InterfaceRegex = /Interface:[\s]([\w.]+)/;
 export default class ARPParser {
     constructor() {}
 
-    parse(table) {
+    parse(table, parseLineHook = null) {
         if (!table || typeof table !== "string") {
             throw new Error(`Missing table to parse`);
         }
@@ -38,12 +38,19 @@ export default class ARPParser {
 
                 if (MacResult) {
                     mac = MacResult[0];
+                    mac = mac.split(':').map(s => ('00' + s).slice(-2)).join(':');
                 }
 
                 if (DeviceResult || InterfaceResult) {
                     device = DeviceResult[0] || InterfaceResult[0];
                 }
             });
+
+            if (parseLineHook) {
+                let entry = {ip, mac, device};
+                parseLineHook(row, entry);
+                [ip, mac, device] = [entry.ip, entry.mac, entry.device];
+            }
 
             if (ip && mac && device) {
                 if (!result.Devices[device]) {
