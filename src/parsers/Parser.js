@@ -38,6 +38,7 @@ export default class ARPParser {
 
                 if (MacResult) {
                     mac = MacResult[0];
+                    mac = mac.replace(/-/g, ':');
                     mac = mac.split(':').map(s => ('00' + s).slice(-2)).join(':');
                 }
 

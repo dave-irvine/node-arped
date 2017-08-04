@@ -1,6 +1,7 @@
 import GenericARP from './fetchers/GenericARP';
 import LinuxARP from './fetchers/LinuxARP';
 import MacOSARP from './fetchers/MacOSARP';
+import WindowsARP from './fetchers/WindowsARP';
 import ARPParser from './parsers/Parser';
 import MacOSParser from './parsers/MacOSParser';
 
@@ -10,6 +11,8 @@ export default class Arped {
             this.arpFetcher = new LinuxARP();
         } else if (/darwin/.test(process.platform)) {
             this.arpFetcher = new MacOSARP();
+        } else if (/^win/.test(process.platform)) {
+            this.arpFetcher = new WindowsARP();
         } else {
             this.arpFetcher = new GenericARP();
         }

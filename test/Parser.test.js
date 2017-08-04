@@ -187,5 +187,25 @@ describe('Parser', () => {
                 }
             });
         });
+
+        it('should parse starndard entries on Windows', () => {
+            let result = parser.parse(fixtures['WindowsARP-Standard.txt']);
+            return expect(result).to.deep.equal({
+                Devices: {
+                    en0: {
+                        IPs: {
+                            '192.168.0.1': '00:01:02:0a:0b:0c',
+                            '192.168.0.2': '00:aa:22:bb:33:cc',
+                            '192.168.0.3': '11:bb:33:cc:44:dd'
+                        },
+                        MACs: {
+                            '00:01:02:0a:0b:0c': '192.168.0.1',
+                            '00:aa:22:bb:33:cc': '192.168.0.2',
+                            '11:bb:33:cc:44:dd': '192.168.0.3'
+                        }
+                    }
+                }
+            });
+        });
     });
 });

@@ -43,7 +43,3 @@ Both of these Objects contain each other, allowing you to lookup a MAC or IP:
 parsedTable.devices['en0'].IPs['192.168.0.1']; // 00:11:22:33:44:55
 parsedTable.devices['en0'].MACs['00:11:22:33:44:55']; // 192.168.0.1
 ```
-
-#### TODO:
-
-Windows support.
