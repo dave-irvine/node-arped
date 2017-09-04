@@ -10,6 +10,7 @@ import FS from 'fs';
 chai.use(sinonChai);
 
 const Parser = require('../src/parsers/Parser').default;
+const MacOSParser = require('../src/parsers/MacOSParser').default;
 const FixturesPath = './test/fixtures/';
 
 describe('Parser', () => {
@@ -155,6 +156,32 @@ describe('Parser', () => {
                             '33:dd:55:ee:66:ff': '192.168.0.4',
                             '44:ee:66:ff:77:aa': '192.168.0.5',
                             '55:ff:77:aa:88:bb': '192.168.0.6'
+                        }
+                    }
+                }
+            });
+        });
+
+        it('should parse starndard entries on macOS', () => {
+            let result = new MacOSParser().parse(fixtures['MacOSARP-Starndard.txt']);
+            return expect(result).to.deep.equal({
+                Devices: {
+                    en0: {
+                        IPs: {
+                            '192.168.0.1': '00:01:02:0a:0b:0c',
+                            '192.168.0.2': '00:aa:22:bb:33:cc'
+                        },
+                        MACs: {
+                            '00:01:02:0a:0b:0c': '192.168.0.1',
+                            '00:aa:22:bb:33:cc': '192.168.0.2',
+                        }
+                    },
+                    en1: {
+                        IPs: {
+                            '192.168.0.3': '11:bb:33:cc:44:dd'
+                        },
+                        MACs: {
+                            '11:bb:33:cc:44:dd': '192.168.0.3'
                         }
                     }
                 }
