@@ -14,6 +14,7 @@ describe('Arped', () => {
         genericARPSpy,
         linuxARPSpy,
         macOSARPSpy,
+        windowsARPSpy,
         sandbox;
 
     before(() => {
@@ -24,11 +25,13 @@ describe('Arped', () => {
         genericARPSpy = sandbox.spy();
         linuxARPSpy = sandbox.spy();
         macOSARPSpy = sandbox.spy();
+        windowsARPSpy = sandbox.spy();
 
         Arped = proxyquire('../src', {
             './fetchers/GenericARP': { default: genericARPSpy },
             './fetchers/LinuxARP': { default: linuxARPSpy },
-            './fetchers/MacOSARP': { default: macOSARPSpy }
+            './fetchers/MacOSARP': { default: macOSARPSpy },
+            './fetchers/WindowsARP': { default: windowsARPSpy }
         }).default;
     });
 
@@ -57,9 +60,19 @@ describe('Arped', () => {
             return expect(macOSARPSpy).to.have.been.called;
         });
 
-        it('should utilise the Generic ARP fetcher on Windows systems', () => {
+        it('should utilise the Windows ARP fetcher on Windows systems', () => {
             Object.defineProperty(process, 'platform', {
                 value: 'win32'
+            });
+
+            new Arped();
+
+            return expect(windowsARPSpy).to.have.been.called;
+        });
+
+        it('should utilise the Generic ARP fetcher on generic systems', () => {
+            Object.defineProperty(process, 'platform', {
+                value: 'generic'
             });
 
             new Arped();
